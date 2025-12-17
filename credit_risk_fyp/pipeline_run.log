@@ -1,0 +1,187 @@
+INFO:__main__:================================================================================
+INFO:__main__:STEP 1: LOADING RAW DATA
+INFO:__main__:================================================================================
+INFO:__main__:Loading training data from: C:\Users\Faheem\Desktop\Umair FYP\FYP2025\credit_risk_fyp\data\raw\lending_club_train.csv
+INFO:__main__:Loading test data from: C:\Users\Faheem\Desktop\Umair FYP\FYP2025\credit_risk_fyp\data\raw\lending_club_test.csv
+INFO:__main__:\u2713 Training data loaded: (500000, 103)
+INFO:__main__:\u2713 Test data loaded: (150000, 103)
+INFO:__main__:
+================================================================================
+INFO:__main__:STEP 2: CREATING TRAIN/VAL/TEST SPLITS
+INFO:__main__:================================================================================
+INFO:__main__:Training set: 425,000 samples
+INFO:__main__:Validation set: 75,000 samples
+INFO:__main__:Test set: 150,000 samples
+INFO:__main__:
+Class distribution in training set (BEFORE SMOTE):
+INFO:__main__:  Class 0 (good): 340,293 (80.1%)
+INFO:__main__:  Class 1 (bad): 84,707 (19.9%)
+INFO:__main__:  Imbalance ratio: 4.02:1
+INFO:__main__:
+================================================================================
+INFO:__main__:STEP 3: PREPROCESSING DATA
+INFO:__main__:================================================================================
+INFO:__main__:Fitting preprocessor on training data...
+INFO:credit_risk_fyp.preprocessor:Fitting preprocessor on training data...
+WARNING:credit_risk_fyp.preprocessor:Target column 'default' not found in data
+INFO:credit_risk_fyp.preprocessor:Identified 36 columns with >50.0% missing
+INFO:credit_risk_fyp.preprocessor:Identified 51 numerical and 14 categorical features
+INFO:credit_risk_fyp.preprocessor:Fitting imputers for missing values...
+INFO:credit_risk_fyp.preprocessor:Fitting encoders for 14 categorical features...
+INFO:credit_risk_fyp.preprocessor:Fitting scaler for numerical features...
+INFO:credit_risk_fyp.preprocessor:Calculating outlier statistics (method=iqr)...
+INFO:credit_risk_fyp.preprocessor:Preprocessor fitting complete
+INFO:credit_risk_fyp.preprocessor:Transforming data...
+INFO:credit_risk_fyp.preprocessor:Transform complete. Shape: (425000, 66)
+INFO:__main__:Transforming validation data...
+INFO:credit_risk_fyp.preprocessor:Transforming data...
+WARNING:credit_risk_fyp.preprocessor:Found 25032 unseen categories in 'emp_title'
+WARNING:credit_risk_fyp.preprocessor:Found 6134 unseen categories in 'title'
+WARNING:credit_risk_fyp.preprocessor:Found 3 unseen categories in 'zip_code'
+WARNING:credit_risk_fyp.preprocessor:Found 5 unseen categories in 'earliest_cr_line'
+WARNING:credit_risk_fyp.preprocessor:Found 29 unseen categories in 'revol_util'
+INFO:credit_risk_fyp.preprocessor:Transform complete. Shape: (75000, 66)
+INFO:__main__:Transforming test data...
+INFO:credit_risk_fyp.preprocessor:Transforming data...
+WARNING:credit_risk_fyp.preprocessor:Found 49985 unseen categories in 'emp_title'
+WARNING:credit_risk_fyp.preprocessor:Found 12011 unseen categories in 'title'
+WARNING:credit_risk_fyp.preprocessor:Found 13 unseen categories in 'zip_code'
+WARNING:credit_risk_fyp.preprocessor:Found 14 unseen categories in 'earliest_cr_line'
+WARNING:credit_risk_fyp.preprocessor:Found 45 unseen categories in 'revol_util'
+INFO:credit_risk_fyp.preprocessor:Transform complete. Shape: (150000, 66)
+INFO:__main__:\u2713 Preprocessing complete
+INFO:__main__:  Training features: (425000, 66)
+INFO:__main__:  Validation features: (75000, 66)
+INFO:__main__:  Test features: (150000, 66)
+INFO:__main__:
+================================================================================
+INFO:__main__:STEP 4: FEATURE ENGINEERING (12 RISK INDICATORS)
+INFO:__main__:================================================================================
+INFO:__main__:Engineering features for training data...
+INFO:credit_risk_fyp.feature_engineer:Fitting feature engineer...
+INFO:credit_risk_fyp.feature_engineer:Feature engineer fitting complete
+INFO:credit_risk_fyp.feature_engineer:Engineering features...
+INFO:credit_risk_fyp.feature_engineer:Creating ratio features...
+INFO:credit_risk_fyp.feature_engineer:Creating time-based features...
+INFO:credit_risk_fyp.feature_engineer:Creating credit behavior features...
+INFO:credit_risk_fyp.feature_engineer:Creating risk indicator features...
+INFO:credit_risk_fyp.feature_engineer:Creating interaction features...
+INFO:credit_risk_fyp.feature_engineer:Creating aggregation features...
+INFO:credit_risk_fyp.feature_engineer:Creating binned features...
+INFO:credit_risk_fyp.feature_engineer:Created 37 new features (total: 103)
+INFO:__main__:Engineering features for validation data...
+INFO:credit_risk_fyp.feature_engineer:Engineering features...
+INFO:credit_risk_fyp.feature_engineer:Creating ratio features...
+INFO:credit_risk_fyp.feature_engineer:Creating time-based features...
+INFO:credit_risk_fyp.feature_engineer:Creating credit behavior features...
+INFO:credit_risk_fyp.feature_engineer:Creating risk indicator features...
+INFO:credit_risk_fyp.feature_engineer:Creating interaction features...
+INFO:credit_risk_fyp.feature_engineer:Creating aggregation features...
+INFO:credit_risk_fyp.feature_engineer:Creating binned features...
+INFO:credit_risk_fyp.feature_engineer:Created 37 new features (total: 103)
+INFO:__main__:Engineering features for test data...
+INFO:credit_risk_fyp.feature_engineer:Engineering features...
+INFO:credit_risk_fyp.feature_engineer:Creating ratio features...
+INFO:credit_risk_fyp.feature_engineer:Creating time-based features...
+INFO:credit_risk_fyp.feature_engineer:Creating credit behavior features...
+INFO:credit_risk_fyp.feature_engineer:Creating risk indicator features...
+INFO:credit_risk_fyp.feature_engineer:Creating interaction features...
+INFO:credit_risk_fyp.feature_engineer:Creating aggregation features...
+INFO:credit_risk_fyp.feature_engineer:Creating binned features...
+INFO:credit_risk_fyp.feature_engineer:Created 37 new features (total: 103)
+INFO:__main__:\u2713 Feature engineering complete
+INFO:__main__:  Training features: 103 columns
+INFO:__main__:  Validation features: 103 columns
+INFO:__main__:  Test features: 103 columns
+WARNING:__main__:\u26a0 Training data contains 485862 NaN values - filling with 0
+INFO:__main__:
+================================================================================
+INFO:__main__:STEP 5: APPLYING SMOTE TO TRAINING DATA ONLY
+INFO:__main__:================================================================================
+INFO:__main__:SMOTE Configuration:
+INFO:__main__:  sampling_strategy: 0.4
+INFO:__main__:  k_neighbors: 5
+INFO:__main__:  random_state: 42
+INFO:src.resampling:Applying SMOTE resampling...
+INFO:src.resampling:Original class distribution: {np.int64(0): np.int64(340293), np.int64(1): np.int64(84707)}
+INFO:src.resampling:Target sampling ratio: 0.4
+INFO:src.resampling:Resampled class distribution: {np.int64(0): np.int64(340293), np.int64(1): np.int64(136117)}
+INFO:src.resampling:Generated 51410 synthetic samples (476410 total from 425000)
+INFO:__main__:
+\u2713 SMOTE resampling complete!
+INFO:__main__:
+Class distribution AFTER SMOTE:
+INFO:__main__:  Class 0 (good): 340,293 (71.4%)
+INFO:__main__:  Class 1 (bad): 136,117 (28.6%)
+INFO:__main__:  New imbalance ratio: 2.50:1
+INFO:__main__:
+Synthetic samples generated: 51,410
+INFO:__main__:Total training samples: 476,410 (from 425,000)
+INFO:__main__:
+================================================================================
+INFO:__main__:STEP 6: VERIFYING SMOTE APPLICATION
+INFO:__main__:================================================================================
+INFO:__main__:
+Check 1: Training set size increased
+INFO:__main__:  \u2713 PASS: Training size 425,000 \u2192 476,410
+INFO:__main__:    Synthetic samples added: 51,410
+INFO:__main__:
+Check 2: Minority class (class 1) count increased
+INFO:__main__:  \u2713 PASS: Minority class 84,707 \u2192 136,117
+INFO:__main__:    Increase: 51,410 samples
+INFO:__main__:
+Check 3: Majority class (class 0) count unchanged
+INFO:__main__:  \u2713 PASS: Majority class unchanged at 340,293
+INFO:__main__:
+Check 4: Class imbalance ratio improved
+INFO:__main__:  \u2713 PASS: Imbalance ratio improved
+INFO:__main__:    Before SMOTE: 4.02:1
+INFO:__main__:    After SMOTE: 2.50:1
+INFO:__main__:    Improvement: 37.8% reduction
+INFO:__main__:
+Check 5: Validation set size unchanged (no SMOTE leakage)
+INFO:__main__:  \u2713 PASS: Validation set unchanged at 75,000 samples
+INFO:__main__:
+Check 6: Test set size unchanged (no SMOTE leakage)
+INFO:__main__:  \u2713 PASS: Test set unchanged at 150,000 samples
+INFO:__main__:
+Check 7: Validation/test sets maintain original imbalance
+Traceback (most recent call last):
+  File "C:\Users\Faheem\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\indexes\base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1698, in pandas._libs.hashtable.Float64HashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1722, in pandas._libs.hashtable.Float64HashTable.get_item
+KeyError: 0.0
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Faheem\Desktop\Umair FYP\FYP2025\credit_risk_fyp\src\data_pipeline.py", line 654, in <module>
+    results = run_pipeline(smote_sampling_ratio=0.40)
+  File "C:\Users\Faheem\Desktop\Umair FYP\FYP2025\credit_risk_fyp\src\data_pipeline.py", line 594, in run_pipeline
+    return pipeline.run()
+           ~~~~~~~~~~~~^^
+  File "C:\Users\Faheem\Desktop\Umair FYP\FYP2025\credit_risk_fyp\src\data_pipeline.py", line 554, in run
+    verification_results = self.verify_smote(
+        y_train_orig, y_train_smote, y_val, y_test
+    )
+  File "C:\Users\Faheem\Desktop\Umair FYP\FYP2025\credit_risk_fyp\src\data_pipeline.py", line 411, in verify_smote
+    test_ratio = test_dist[0] / test_dist[1]
+                 ~~~~~~~~~^^^
+  File "C:\Users\Faheem\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\series.py", line 1130, in __getitem__
+    return self._get_value(key)
+           ~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\Faheem\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\series.py", line 1246, in _get_value
+    loc = self.index.get_loc(label)
+  File "C:\Users\Faheem\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\indexes\base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 0
+
+================================================================================
+CREDIT RISK ASSESSMENT - DATA PIPELINE
+================================================================================

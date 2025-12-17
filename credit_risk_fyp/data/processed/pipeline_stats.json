@@ -1,0 +1,6 @@
+{
+  "original_data_size": 500000,
+  "train_size_before_smote": 325000,
+  "val_size": 75000,
+  "test_size": 100000,
+  "train_class_0_before_smote": 

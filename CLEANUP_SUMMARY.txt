@@ -1,0 +1,61 @@
+PROJECT CLEANUP SUMMARY
+=======================
+
+Date: December 11, 2025
+
+REMOVED FILES (Outdated/Duplicate Documentation):
+-------------------------------------------------
+1. SETUP_COMPLETE.md - Installation guide (outdated)
+2. PROJECT_PROGRESS_CHART.md - Old progress tracker (outdated)
+3. INTERACTIVE_UI_GUIDE.md - Merged into main README
+4. credit_risk_fyp/notebooks/ALL_MODELS_GUIDE.md - Model guide (outdated)
+5. credit_risk_fyp/README.md - Generic template (replaced)
+6. test_installation.py - Test script (no longer needed)
+7. regenerate_data.py - Utility script (no longer needed)
+8. retrain_all_models.py - Utility script (no longer needed)
+9. nul - Empty file (artifact)
+
+CONSOLIDATED INTO:
+------------------
+- Single comprehensive README.md at project root
+- All important information now in one place
+- Clear structure and navigation
+- Up-to-date instructions
+
+CURRENT PROJECT STRUCTURE:
+--------------------------
+FYP2025/
+├── README.md                           # Main documentation (NEW & COMPREHENSIVE)
+├── run_*.py (9 files)                  # Convenience runner scripts
+├── credit_risk_fyp/
+│   ├── data/                           # Datasets
+│   ├── models/                         # Trained models
+│   ├── notebooks/ (7 .ipynb files)     # Jupyter notebooks
+│   ├── results/                        # Output files
+│   ├── src/ (10 .py modules)           # Source code
+│   ├── requirements.txt                # Dependencies
+│   └── setup.py                        # Package setup
+└── venv/                               # Virtual environment
+
+BENEFITS OF CLEANUP:
+--------------------
+✓ Single source of truth (README.md)
+✓ No duplicate/conflicting documentation
+✓ Easier to navigate
+✓ Up-to-date information
+✓ Professional project structure
+✓ Reduced clutter
+
+WHAT'S IN THE NEW README:
+-------------------------
+- Quick start guide
+- Complete project overview
+- Interactive UI documentation
+- Model performance metrics
+- Stress testing details
+- Counterfactual recommendations
+- System requirements
+- Troubleshooting guide
+- Educational value section
+
+NOTE: All essential information has been preserved and consolidated.
